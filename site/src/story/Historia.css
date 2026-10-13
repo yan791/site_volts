@@ -543,9 +543,66 @@
   }
 }
 
-/* no celular os botões da primeira dobra ocupam o rodapé: a dica de rolagem sai */
+/* dica de rolagem: no desktop uma linha que desce; no celular um selo com setas subindo */
+.hs-dica-movel,
+.hs-dica-setas {
+  display: none;
+}
 @media (max-width: 767px) {
+  .hs-f1 {
+    bottom: calc(86px + env(safe-area-inset-bottom));
+  }
   .hs-dica {
+    bottom: calc(18px + env(safe-area-inset-bottom));
+    grid-auto-flow: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px 10px 13px;
+    background: rgba(6, 9, 7, 0.6);
+    box-shadow: inset 0 0 0 1px var(--linha-volt);
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    color: var(--fg);
+    font-size: 0.6875rem;
+    white-space: nowrap;
+  }
+  .hs-dica i,
+  .hs-dica-desk {
     display: none;
+  }
+  .hs-dica-movel {
+    display: inline;
+  }
+  .hs-dica-setas {
+    position: relative;
+    display: block;
+    width: 14px;
+    height: 20px;
+  }
+  .hs-dica-setas b {
+    position: absolute;
+    left: 2px;
+    top: 9px;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid var(--volt);
+    border-left: 2px solid var(--volt);
+    rotate: 45deg;
+    animation: hs-arrasta 1.6s var(--ease) infinite;
+  }
+  .hs-dica-setas b + b {
+    animation-delay: 0.28s;
+  }
+}
+@keyframes hs-arrasta {
+  0% {
+    opacity: 0;
+    transform: translate3d(4px, 4px, 0);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-6px, -6px, 0);
   }
 }

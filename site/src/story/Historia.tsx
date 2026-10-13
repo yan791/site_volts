@@ -428,7 +428,13 @@ export function Historia() {
         </nav>
 
         <div className="hs-dica" aria-hidden="true">
-          <span>Role para ligar o salão</span>
+          <span className="hs-dica-desk">Role para ligar o salão</span>
+          {/* no celular: setas subindo, como o gesto de arrastar a tela para cima */}
+          <span className="hs-dica-setas">
+            <b />
+            <b />
+          </span>
+          <span className="hs-dica-movel">Arraste para cima</span>
           <i />
         </div>
       </div>
