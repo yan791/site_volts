@@ -5,7 +5,7 @@ gsap.registerPlugin(SplitText)
 
 /*
  * Efeitos ligados por atributo, para qualquer seção usar sem repetir código:
- *  data-titulo        linhas sobem de dentro de uma máscara quando o título entra na tela
+ *  data-titulo        palavras sobem de dentro de uma máscara quando o título entra na tela
  *  data-decodifica    rótulo que se "decodifica" letra a letra, como um painel ligando
  *  data-inclina       inclina com a velocidade do scroll
  *  data-parallax="n"  desloca n (fração da altura) enquanto atravessa a tela
@@ -38,19 +38,18 @@ export function ligarEfeitos(raiz: HTMLElement) {
   const finos = window.matchMedia('(pointer: fine)').matches
   const ctx = gsap.context(() => {
     raiz.querySelectorAll<HTMLElement>('[data-titulo]').forEach((el) => {
+      // dividido por palavras (não por linhas): as palavras se reorganizam sozinhas em qualquer
+      // largura, então a frase nunca fica com linhas quebradas no celular
       SplitText.create(el, {
-        type: 'lines',
-        mask: 'lines',
-        linesClass: 'linha-mascara',
-        autoSplit: true,
+        type: 'words',
+        mask: 'words',
+        wordsClass: 'palavra-mascara',
         onSplit(self) {
-          return gsap.from(self.lines, {
+          return gsap.from(self.words, {
             yPercent: 105,
-            rotate: 1,
-            transformOrigin: '0% 100%',
-            duration: 1.15,
+            duration: 0.9,
             ease: 'expo.out',
-            stagger: 0.085,
+            stagger: 0.022,
             scrollTrigger: { trigger: el, start: 'top 88%', once: true },
           })
         },

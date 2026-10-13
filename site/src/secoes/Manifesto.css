@@ -3,11 +3,7 @@
   background: var(--ink-0);
 }
 .mf-fixo {
-  min-height: 100vh;
-  min-height: 100svh;
-  display: flex;
-  align-items: center;
-  padding-block: calc(var(--cabecalho) + 32px) 48px;
+  padding-block: clamp(110px, 12vw, 170px) 24px;
 }
 .mf-texto {
   margin-top: 28px;
@@ -59,29 +55,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-.mf-moldura {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-.mf-moldura rect {
-  fill: none;
-  stroke-width: 1.6px;
-  vector-effect: non-scaling-stroke;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-}
-.mf-moldura .q {
-  stroke: var(--quente);
-  filter: drop-shadow(0 0 8px rgba(243, 230, 207, 0.6));
-}
-.mf-moldura .v {
-  stroke: var(--neon);
-  filter: drop-shadow(0 0 10px rgba(70, 240, 140, 0.8));
 }
 .mf-foto figcaption {
   margin-top: 16px;

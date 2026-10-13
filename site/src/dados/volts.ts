@@ -76,7 +76,7 @@ export const programas: Programa[] = [
     paraQuem: 'Para quem quer acompanhamento próximo e um treino montado para o próprio objetivo.',
     focos: ['Emagrecimento', 'Força', 'Hipertrofia', 'Condicionamento', 'Saúde e qualidade de vida'],
     detalhe: 'Acompanhamento próximo e toda a estrutura da Volts para a sua evolução.',
-    foto: { src: 'professores', alt: 'Professores da Volts com a camisa preta do estúdio', posicao: '50% 30%' },
+    foto: { src: 'professores', alt: 'Professores da Volts com a camisa preta do estúdio', posicao: '50% 0%' },
     acao: { rotulo: 'Quero experimentar', mensagem: 'Oi, Volts! Vim pelo site e quero agendar uma aula experimental de VoltsClass.' },
   },
   {
@@ -137,7 +137,7 @@ export const diferenciais = [
     foto: 'professores',
     alt: 'Três professores da Volts',
     resumo: 'Professores em cada treino',
-    posicao: '50% 30%',
+    posicao: '50% 0%',
   },
   {
     titulo: 'Grupos reduzidos',
@@ -208,7 +208,7 @@ export const perguntas = [
   },
   {
     p: 'Já sou aluno. Onde agendo minhas aulas?',
-    r: 'Na área do aluno, no sistema de agendamento da Volts. O link está no rodapé desta página.',
+    r: 'Na área do aluno, no sistema de agendamento da Volts. O link "Já é aluno?" fica no topo (no menu, pelo celular), no bloco Como chegar e no rodapé desta página.',
   },
 ]
 

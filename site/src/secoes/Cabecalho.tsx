@@ -85,6 +85,9 @@ export function Cabecalho() {
         </nav>
 
         <div className="cabecalho__acoes">
+          <a className="cabecalho__aluno" href={contato.areaDoAluno} target="_blank" rel="noopener">
+            Já é aluno?
+          </a>
           <a className="botao botao--fantasma cabecalho__atalho cabecalho__atalho--camisa" href="#comprar-camisa" data-cursor="Comprar">
             <Icone nome="camisa" tamanho={17} className="cabecalho__icone" />
             <span>
@@ -112,6 +115,12 @@ export function Cabecalho() {
       </div>
 
       <div id="menu-celular" ref={painelRef} className="menu-celular" hidden={!aberto} role="dialog" aria-modal="true" aria-label="Menu">
+        <a className="menu-celular__aluno" href={contato.areaDoAluno} target="_blank" rel="noopener">
+          <span>
+            <strong>Já é aluno?</strong> Agende suas aulas na área do aluno.
+          </span>
+          <Icone nome="externo" tamanho={18} />
+        </a>
         <nav aria-label="Seções da página">
           <ol className="menu-celular__lista">
             {LINKS.map((l, i) => (

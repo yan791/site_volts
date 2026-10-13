@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Foto } from '../componentes/Foto'
-import { gsap } from '../lib/rolagem'
+import { gsap, ScrollTrigger } from '../lib/rolagem'
 import './Manifesto.css'
 
 // frase da própria Volts (legendas de 05/10/2026); as palavras-chave acendem em amarelo
@@ -14,15 +14,15 @@ export function Manifesto() {
   useEffect(() => {
     const raiz = ref.current!
     const ctx = gsap.context(() => {
+      // a frase acende sozinha, palavra por palavra, quando entra na tela: a página não para aqui
       const palavras = gsap.utils.toArray<HTMLElement>('.mf-p')
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: '.mf-fixo', start: 'top top', end: '+=140%', pin: true, scrub: 0.6, anticipatePin: 1 },
-      })
-      tl.to(palavras, { opacity: 1, stagger: 0.12, duration: 0.5, ease: 'none' }, 0)
-        .to('.mf-p--chave', { color: '#d6f600', textShadow: '0 0 28px rgba(214,246,0,.45)', stagger: 0.6, duration: 0.4, ease: 'none' }, 0.3)
-        .fromTo('.mf-carga i', { scaleX: 0 }, { scaleX: 1, ease: 'none', duration: tl.duration() || 3 }, 0)
+      const tl = gsap.timeline({ paused: true })
+      tl.to(palavras, { opacity: 1, stagger: 0.045, duration: 0.45, ease: 'power1.out' }, 0)
+        .to('.mf-p--chave', { color: '#d6f600', textShadow: '0 0 28px rgba(214,246,0,.45)', stagger: 0.18, duration: 0.5, ease: 'power1.out' }, 0.5)
+        .fromTo('.mf-carga i', { scaleX: 0 }, { scaleX: 1, ease: 'power2.inOut', duration: tl.duration() || 2 }, 0)
+      ScrollTrigger.create({ trigger: '.mf-texto', start: 'top 78%', once: true, onEnter: () => tl.play() })
 
-      // equipe: a foto abre pelo corte diagonal, a moldura de neon se desenha
+      // equipe: a foto abre pelo corte diagonal
       gsap.fromTo(
         '.mf-foto-recorte',
         { clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)' },
@@ -34,11 +34,6 @@ export function Manifesto() {
         },
       )
       gsap.fromTo('.mf-foto img', { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.mf-equipe', start: 'top bottom', end: 'bottom top', scrub: true } })
-      gsap.fromTo(
-        '.mf-moldura rect',
-        { strokeDashoffset: 1 },
-        { strokeDashoffset: 0, duration: 1.8, ease: 'power2.inOut', stagger: 0.25, scrollTrigger: { trigger: '.mf-equipe', start: 'top 65%', once: true } },
-      )
       gsap.from('.mf-citacao span', {
         yPercent: 120,
         opacity: 0,
@@ -74,12 +69,8 @@ export function Manifesto() {
       <div className="recipiente mf-equipe">
         <figure className="mf-foto">
           <div className="mf-foto-recorte">
-            <Foto nome="professores" alt="Três professores da Volts com a camisa preta do estúdio" sizes="(max-width: 899px) 92vw, 46vw" posicao="50% 4%" />
+            <Foto nome="professores" alt="Três professores da Volts com a camisa preta do estúdio" sizes="(max-width: 899px) 92vw, 46vw" posicao="50% 6%" />
           </div>
-          <svg className="mf-moldura" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-            <rect x="-3" y="-4" width="58" height="52" pathLength={1} className="q" />
-            <rect x="6" y="5" width="30" height="30" pathLength={1} className="v" />
-          </svg>
           <figcaption className="rotulo">Equipe Volts</figcaption>
         </figure>
         <div className="mf-equipe-texto">

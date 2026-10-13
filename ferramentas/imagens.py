@@ -20,7 +20,9 @@ FOTOS = {
     "fachada-raio": dict(src="quadros/fachada-raio-a.jpg", box=(0, 0.04, 0.70, 0.92), larguras=[420, 560], grade="leve"),
     "fachada": dict(src="quadros/fachada-ext-a.jpg", box=(0, 0.13, 1, 0.56), larguras=[480, 720], grade="leve"),
     "equipamentos": dict(src="quadros/equip-a.jpg", box=(0, 0.02, 1, 0.66), larguras=[480, 720], grade="neon"),
-    "professores": dict(src="Dcvn-bJunIQ_hd.jpg", box=(0.46, 0.49, 1, 1), larguras=[480, 780], grade="leve"),
+    # cabeças inteiras: o recorte sobe até acima do cabelo; o fim do texto do post ("...ÇÃO") que
+    # entraria no canto é coberto com o próprio fundo preto da arte (apagar = caixas em fração da original)
+    "professores": dict(src="Dcvn-bJunIQ_hd.jpg", box=(0.31, 0.415, 1, 1), apagar=[(0.30, 0.40, 0.456, 0.47), (0.30, 0.46, 0.35, 0.50)], larguras=[480, 860], grade="leve"),
     "ativa": dict(src="Dd4ffYTxktp_hd.jpg", box=(0.14, 0.095, 0.96, 0.52), larguras=[600, 1100], grade="leve"),
     "corrida": dict(src="DdFMBo1tWF0_hd.jpg", box=(0.495, 0.15, 0.885, 0.98), larguras=[480, 720], grade="leve"),
     "meia-maratona": dict(src="DdeB0bGuG2c_hd.jpg", box=(0, 0.10, 1, 0.43), larguras=[720, 1400], grade="leve"),
@@ -50,6 +52,12 @@ def main(preview: bool) -> None:
     for nome, cfg in FOTOS.items():
         im = Image.open(BRUTO / cfg["src"]).convert("RGB")
         w, h = im.size
+        for al, at, ar, ab in cfg.get("apagar", []):
+            caixa = (round(al * w), round(at * h), round(ar * w), round(ab * h))
+            # cor do fundo: mediana dos pixels escuros da própria área (ignora as letras)
+            escuros = sorted(px for px in im.crop(caixa).getdata() if sum(px) < 90)
+            fundo = escuros[len(escuros) // 2] if escuros else (0, 0, 0)
+            im.paste(fundo, caixa)
         l, t, r, b = cfg["box"]
         im = im.crop((round(l * w), round(t * h), round(r * w), round(b * h)))
         im = tratar(im, cfg["grade"])

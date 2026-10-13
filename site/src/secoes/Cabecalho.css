@@ -2,17 +2,27 @@
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  /* vidro translúcido: sempre visível sem apagar o salão 3D atrás */
+  box-shadow: 0 1px 0 rgba(238, 242, 234, 0.07);
+}
+/*
+ * Vidro translúcido: sempre visível sem apagar o salão 3D atrás. Fica num pseudo-elemento porque
+ * backdrop-filter no próprio cabeçalho prenderia o menu do celular (position: fixed) dentro dele.
+ */
+.cabecalho::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(6, 9, 7, 0.24);
   -webkit-backdrop-filter: blur(12px) saturate(1.25);
   backdrop-filter: blur(12px) saturate(1.25);
-  box-shadow: 0 1px 0 rgba(238, 242, 234, 0.07);
   transition: background-color 0.5s var(--ease);
+  pointer-events: none;
 }
-.cabecalho--rolou {
+.cabecalho--rolou::before {
   background: rgba(6, 9, 7, 0.46);
 }
-.cabecalho--aberto {
+.cabecalho--aberto::before {
   background: var(--ink-0);
 }
 .cabecalho__barra {
@@ -70,6 +80,43 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+.cabecalho__aluno {
+  position: relative;
+  margin-right: 8px;
+  padding: 10px 0;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-stretch: 106%;
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--volt);
+  text-underline-offset: 6px;
+  white-space: nowrap;
+}
+.cabecalho__aluno:hover {
+  color: var(--volt);
+}
+.menu-celular__aluno {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  background: var(--ink-3);
+  box-shadow: inset 3px 0 0 var(--volt);
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+.menu-celular__aluno strong {
+  color: var(--fg);
+}
+.menu-celular__aluno svg {
+  flex: none;
+  color: var(--volt);
 }
 .cabecalho__atalho {
   min-height: 44px;
@@ -160,7 +207,8 @@
 }
 
 @media (max-width: 1220px) {
-  .cabecalho__nav {
+  .cabecalho__nav,
+  .cabecalho__aluno {
     display: none;
   }
   .cabecalho__menu {

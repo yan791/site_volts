@@ -22,6 +22,12 @@ export function Contato() {
 
         <div className="contato__grade">
           <div className="contato__info" data-revelar>
+            <a className="contato__aluno" href={contato.areaDoAluno} target="_blank" rel="noopener">
+              <span>
+                <strong>Já é aluno?</strong> Agende suas aulas na área do aluno.
+              </span>
+              <Icone nome="externo" tamanho={18} />
+            </a>
             <dl className="contato__lista">
               <div>
                 <dt>
@@ -89,12 +95,6 @@ export function Contato() {
                 <Icone nome="mapa" /> Abrir rota
               </a>
             </div>
-            <a className="contato__aluno" href={contato.areaDoAluno} target="_blank" rel="noopener">
-              <span>
-                <strong>Já é aluno?</strong> Agende suas aulas na área do aluno.
-              </span>
-              <Icone nome="externo" tamanho={18} />
-            </a>
           </div>
 
           <div className="contato__mapa" data-revelar style={{ ['--atraso' as string]: 120 }}>

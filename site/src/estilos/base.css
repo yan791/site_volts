@@ -517,10 +517,10 @@ body.pausado *::after {
     --ang: 360deg;
   }
 }
-/* títulos divididos em linhas pelo SplitText */
-.linha-mascara {
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
+/* títulos divididos em palavras pelo SplitText (a máscara não corta as letras que descem) */
+.palavra-mascara {
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
 }
 
 html.travado {
