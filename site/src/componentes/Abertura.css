@@ -1,0 +1,111 @@
+.abertura {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  pointer-events: all;
+}
+.ab-a,
+.ab-b {
+  position: absolute;
+  inset: -10%;
+  background: var(--ink-0);
+}
+/* as duas metades seguem a diagonal do raio do logo */
+.ab-a {
+  clip-path: polygon(0 0, 62% 0, 38% 100%, 0 100%);
+}
+.ab-b {
+  clip-path: polygon(62% 0, 100% 0, 100% 100%, 38% 100%);
+}
+.ab-a::after,
+.ab-b::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, transparent calc(50% - 1px), var(--volt) 50%, transparent calc(50% + 1px));
+  opacity: 0;
+}
+.ab--clarao .ab-a::after,
+.ab--clarao .ab-b::after {
+  opacity: 1;
+}
+.ab-conteudo {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+.ab-marca {
+  width: clamp(90px, 12vw, 140px);
+  overflow: visible;
+}
+.ab-marca path {
+  fill-opacity: 0;
+  stroke-width: 4;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.ab-raio {
+  fill: #f2ea00;
+  stroke: #f2ea00;
+  filter: drop-shadow(0 0 12px rgba(242, 234, 0, 0.6));
+}
+.ab-barra-v {
+  fill: var(--fg);
+  stroke: var(--fg);
+}
+.ab-leitura {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-stretch: 62%;
+  font-style: italic;
+  font-size: clamp(3.4rem, 9vw, 6.4rem);
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+  color: var(--volt);
+  animation: ab-pisca 0.9s steps(1) infinite;
+}
+.ab-v {
+  font-size: 0.45em;
+  color: var(--fg-2);
+}
+.ab-barra {
+  width: min(260px, 60vw);
+  height: 2px;
+  background: var(--linha-2);
+  overflow: hidden;
+}
+.ab-barra i {
+  display: block;
+  height: 100%;
+  background: var(--volt);
+  box-shadow: 0 0 12px var(--volt);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.ab-rotulo {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+@keyframes ab-pisca {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  46% {
+    opacity: 0.55;
+  }
+  52% {
+    opacity: 1;
+  }
+}

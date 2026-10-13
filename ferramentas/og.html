@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<style>
+  @font-face { font-family: 'Archivo'; src: url('../site/node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2') format('woff2'); font-weight: 100 900; font-stretch: 62% 125%; }
+  @font-face { font-family: 'Archivo'; font-style: italic; src: url('../site/node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-italic.woff2') format('woff2'); font-weight: 100 900; font-stretch: 62% 125%; }
+  @font-face { font-family: 'Martian'; src: url('../site/node_modules/@fontsource-variable/martian-mono/files/martian-mono-latin-wght-normal.woff2') format('woff2'); font-weight: 100 800; }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #060907; color: #eef2ea; font-family: 'Archivo', sans-serif; }
+  .foto { position: absolute; top: 0; right: 0; bottom: 0; width: 470px; clip-path: polygon(26% 0, 100% 0, 100% 100%, 0 100%); }
+  .foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .foto::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,9,7,.5), transparent 40%); }
+  svg.linha { position: absolute; top: 0; right: 0; width: 470px; height: 630px; }
+  .txt { position: absolute; left: 64px; top: 92px; width: 700px; }
+  .rot { font-family: 'Martian'; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: #aab4ac; }
+  .l1 { font-weight: 900; font-stretch: 125%; font-size: 112px; line-height: .86; text-transform: uppercase; margin-top: 34px; }
+  .l2 { font-weight: 900; font-stretch: 62%; font-style: italic; font-size: 104px; line-height: .9; text-transform: uppercase; }
+  .l2 span { color: #d6f600; }
+  .sub { margin-top: 30px; font-size: 24px; line-height: 1.4; color: #aab4ac; font-weight: 500; max-width: 600px; }
+  .marca { position: absolute; left: 64px; bottom: 48px; display: flex; align-items: flex-end; gap: 2px; }
+  .marca svg { height: 30px; }
+  .marca b { font-weight: 860; font-stretch: 122%; font-size: 40px; line-height: .74; }
+  .cta { position: absolute; left: 330px; bottom: 44px; font-family: 'Martian'; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: #d6f600; }
+</style>
+</head>
+<body>
+  <div class="foto"><img src="../site/public/img/salao-720.webp" alt="" /></div>
+  <svg class="linha" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="26" y1="0" x2="0" y2="100" stroke="#d6f600" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+  <div class="txt">
+    <div class="rot">Volts Training Studio · Olinda, PE</div>
+    <div class="l1">Energia</div>
+    <div class="l2">para todo <span>ritmo.</span></div>
+    <div class="sub">Treino funcional, corrida e treinamento personalizado em grupos reduzidos.</div>
+  </div>
+  <div class="marca"><svg viewBox="-4 -4 317 268"><path d="M0 0H69L100 92L119 102L85 106L84 186Z" fill="#f2ea00"/><path d="M228 0H309L201 260H121Z" fill="#eef2ea"/></svg><b>OLTS</b></div>
+  <div class="cta">Agende sua aula experimental</div>
+</body>
+</html>

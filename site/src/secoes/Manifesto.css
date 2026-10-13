@@ -1,0 +1,127 @@
+.manifesto {
+  position: relative;
+  background: var(--ink-0);
+}
+.mf-fixo {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--cabecalho) + 32px) 48px;
+}
+.mf-texto {
+  margin-top: 28px;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: 104%;
+  font-size: clamp(1.9rem, 4.5vw, 4.9rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+.mf-p {
+  opacity: 0.13;
+  transition: none;
+}
+.mf-carga {
+  margin-top: 40px;
+  height: 2px;
+  background: var(--linha);
+  overflow: hidden;
+}
+.mf-carga i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon), var(--volt));
+  box-shadow: 0 0 14px var(--volt);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.mf-equipe {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(40px, 7vw, 120px);
+  align-items: center;
+  padding-block: clamp(60px, 9vw, 140px) clamp(90px, 12vw, 170px);
+}
+.mf-foto {
+  position: relative;
+}
+.mf-foto-recorte {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  background: var(--ink-2);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+.mf-foto-recorte img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mf-moldura {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.mf-moldura rect {
+  fill: none;
+  stroke-width: 1.6px;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.mf-moldura .q {
+  stroke: var(--quente);
+  filter: drop-shadow(0 0 8px rgba(243, 230, 207, 0.6));
+}
+.mf-moldura .v {
+  stroke: var(--neon);
+  filter: drop-shadow(0 0 10px rgba(70, 240, 140, 0.8));
+}
+.mf-foto figcaption {
+  margin-top: 16px;
+}
+.mf-equipe-texto {
+  display: grid;
+  gap: 26px;
+}
+.mf-grande {
+  font-family: var(--f-display);
+  font-weight: 760;
+  font-stretch: 104%;
+  font-size: clamp(1.4rem, 2.3vw, 2.2rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+.mf-citacao {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.22em;
+  margin: 12px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--linha-2);
+  font-style: italic;
+  font-size: clamp(2.6rem, 5vw, 4.8rem);
+  color: var(--volt);
+  overflow: hidden;
+}
+.mf-citacao span {
+  display: inline-block;
+}
+.linha-mascara {
+  padding-bottom: 0.06em;
+}
+
+@media (max-width: 899px) {
+  .mf-equipe {
+    grid-template-columns: 1fr;
+  }
+  .mf-texto {
+    font-size: clamp(1.7rem, 7.4vw, 3rem);
+  }
+}

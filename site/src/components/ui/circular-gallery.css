@@ -1,0 +1,154 @@
+/* CircularGallery: anel 3D de cartões (equivalente em CSS das classes Tailwind do original) */
+.cg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cg-anel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.cg-cartao {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-style: preserve-3d;
+}
+.cg-cartao--clicavel {
+  cursor: pointer;
+}
+.cg-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  clip-path: polygon(0 0, calc(100% - var(--cg-corte)) 0, 100% var(--cg-corte), 100% 100%, 0 100%);
+  background: var(--ink-2, #0e140f);
+}
+.cg-face--costas {
+  transform: rotateY(180deg);
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(rgba(214, 246, 0, 0.05) 1px, transparent 1px) 0 0 / 100% 22px,
+    radial-gradient(ellipse at 50% 120%, rgba(70, 240, 140, 0.16), transparent 60%),
+    #0a0f0b;
+}
+
+/* ---------- frente ---------- */
+.cg-foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.06);
+}
+.cg-degrade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(6, 9, 7, 0.96) 4%, rgba(6, 9, 7, 0.55) 34%, rgba(6, 9, 7, 0) 62%),
+    linear-gradient(0deg, rgba(70, 240, 140, 0.16), rgba(70, 240, 140, 0) 42%);
+}
+.cg-selo {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 62%;
+  font-size: calc(var(--cg-w, 300px) * 0.19);
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--volt, #d6f600);
+}
+.cg-legenda {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  gap: 6px;
+  padding: 18px 18px 16px;
+  color: #fff;
+}
+.cg-titulo {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-stretch: 104%;
+  text-transform: uppercase;
+  /* acompanha a largura do cartão: a palavra mais longa cabe em qualquer tamanho */
+  font-size: calc(var(--cg-w, 300px) * 0.064);
+  line-height: 0.98;
+}
+.cg-sub {
+  font-style: normal;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--fg-2, #aab4ac);
+}
+.cg-credito {
+  margin-top: 4px;
+  font-family: var(--f-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-3, #808b83);
+}
+.cg-sombra {
+  position: absolute;
+  inset: 0;
+  background: #040605;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- moldura em todas as faces; acende no cartão de frente ---------- */
+.cg-moldura {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.cg-moldura polygon {
+  fill: none;
+  stroke: rgba(238, 242, 234, 0.22);
+  stroke-width: 1.5px;
+  transition: stroke 0.5s var(--ease);
+}
+.cg-cartao[data-frente] .cg-face--frente .cg-moldura polygon {
+  stroke: var(--volt, #d6f600);
+  stroke-width: 2px;
+}
+
+/* ---------- verso ---------- */
+.cg-marca {
+  width: 46%;
+  overflow: visible;
+}
+.cg-marca path {
+  fill: none;
+  stroke: rgba(214, 246, 0, 0.34);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.cg-costas-num {
+  position: absolute;
+  bottom: 14px;
+  right: 18px;
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  color: var(--fg-3, #808b83);
+}

@@ -1,0 +1,110 @@
+.duvidas {
+  padding: clamp(80px, 10vw, 150px) 0;
+  background: var(--ink-1);
+}
+.duvidas__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(40px, 7vw, 120px);
+  align-items: start;
+}
+.duvidas__lado {
+  position: sticky;
+  top: calc(var(--cabecalho) + 40px);
+  display: grid;
+  gap: 22px;
+  justify-items: start;
+}
+.duvidas__lista {
+  border-top: 1px solid var(--linha-2);
+}
+.duvida {
+  border-bottom: 1px solid var(--linha-2);
+}
+.duvida h3 {
+  font: inherit;
+}
+.duvida button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+  text-align: left;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-stretch: 108%;
+  font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+  line-height: 1.25;
+  transition: color 0.3s var(--ease);
+}
+.duvida button:hover {
+  color: var(--volt);
+}
+.duvida__sinal {
+  position: relative;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  box-shadow: inset 0 0 0 1px var(--linha-2);
+  transition:
+    background-color 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+.duvida__sinal::before,
+.duvida__sinal::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 1.75px;
+  margin: -0.875px 0 0 -6px;
+  background: currentColor;
+  transition: transform 0.45s var(--ease);
+}
+.duvida__sinal::after {
+  transform: rotate(90deg);
+}
+.duvida--aberta .duvida__sinal {
+  background: var(--volt);
+  color: var(--volt-ink);
+  box-shadow: none;
+}
+.duvida--aberta .duvida__sinal::after {
+  transform: rotate(0deg);
+}
+.duvida__painel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s var(--ease);
+}
+.duvida--aberta .duvida__painel {
+  grid-template-rows: 1fr;
+}
+.duvida__painel > div {
+  overflow: hidden;
+}
+.duvida__painel p {
+  padding: 0 56px 26px 0;
+  color: var(--fg-2);
+  max-width: 62ch;
+}
+
+@media (max-width: 899px) {
+  .duvidas__grade {
+    grid-template-columns: 1fr;
+  }
+  .duvidas__lado {
+    position: static;
+  }
+  .duvida__painel p {
+    padding-right: 0;
+  }
+}
+/* movimento reduzido (classe html.reduzido, ver lib/utilidades.ts) */
+html.reduzido .duvida__painel {
+  transition: none;
+}
+

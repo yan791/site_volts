@@ -1,0 +1,209 @@
+.cabecalho {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  /* vidro translúcido: sempre visível sem apagar o salão 3D atrás */
+  background: rgba(6, 9, 7, 0.24);
+  -webkit-backdrop-filter: blur(12px) saturate(1.25);
+  backdrop-filter: blur(12px) saturate(1.25);
+  box-shadow: 0 1px 0 rgba(238, 242, 234, 0.07);
+  transition: background-color 0.5s var(--ease);
+}
+.cabecalho--rolou {
+  background: rgba(6, 9, 7, 0.46);
+}
+.cabecalho--aberto {
+  background: var(--ink-0);
+}
+.cabecalho__barra {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: var(--cabecalho);
+}
+.cabecalho__logo {
+  display: inline-flex;
+  flex: none;
+  padding: 6px 0;
+}
+.cabecalho__logo .logo {
+  font-size: 25px;
+}
+.cabecalho__nav ul {
+  display: flex;
+  gap: clamp(18px, 2.2vw, 34px);
+}
+.cabecalho__nav a {
+  position: relative;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-stretch: 106%;
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  padding: 10px 0;
+  transition: color 0.3s var(--ease);
+}
+.cabecalho__nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  height: 1px;
+  background: var(--volt);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s var(--ease);
+}
+.cabecalho__nav a:hover {
+  color: var(--fg);
+}
+.cabecalho__nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.cabecalho__acoes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cabecalho__atalho {
+  min-height: 44px;
+  gap: 8px;
+  padding: 0 18px;
+  font-size: 0.72rem;
+  --corte: 10px;
+}
+.cabecalho__atalho--camisa {
+  background: rgba(6, 9, 7, 0.35);
+}
+.cabecalho__icone {
+  flex: none;
+}
+.cabecalho__menu {
+  display: none;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--linha-2);
+}
+
+.menu-celular {
+  position: fixed;
+  inset: var(--cabecalho) 0 0 0;
+  z-index: 49;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 28px var(--margem) calc(28px + env(safe-area-inset-bottom));
+  background: var(--ink-0);
+  overflow-y: auto;
+}
+.menu-celular[hidden] {
+  display: none;
+}
+.menu-celular__lista li {
+  border-bottom: 1px solid var(--linha);
+  animation: menu-entra 0.6s var(--ease) both;
+  animation-delay: calc(var(--i) * 50ms);
+}
+.menu-celular__lista a {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 16px 0;
+  font-family: var(--f-display);
+  font-weight: 860;
+  font-stretch: 112%;
+  font-size: clamp(1.6rem, 7vw, 2.4rem);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.menu-celular__num {
+  font-family: var(--f-mono);
+  font-weight: 500;
+  font-size: 0.7rem;
+  color: var(--volt);
+  transform: translateY(-0.6em);
+}
+.menu-celular__rodape {
+  display: grid;
+  gap: 20px;
+}
+.menu-celular__rodape .botao {
+  width: 100%;
+}
+.menu-celular__contatos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  color: var(--fg-2);
+  font-size: 0.95rem;
+}
+.menu-celular__contatos a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+}
+@keyframes menu-entra {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (max-width: 1220px) {
+  .cabecalho__nav {
+    display: none;
+  }
+  .cabecalho__menu {
+    display: grid;
+  }
+}
+@media (max-width: 560px) {
+  .cabecalho__barra {
+    gap: 8px;
+  }
+  .cabecalho__logo .logo {
+    font-size: 20px;
+  }
+  .cabecalho__acoes {
+    gap: 6px;
+  }
+  .cabecalho__atalho {
+    min-height: 40px;
+    padding: 0 9px;
+    font-size: 0.625rem;
+    letter-spacing: 0.03em;
+  }
+  .cabecalho__icone {
+    display: none;
+  }
+  .cabecalho__menu {
+    width: 40px;
+    height: 40px;
+  }
+}
+/* celulares: os rótulos quebram em duas linhas para o logo e os dois atalhos caberem inteiros */
+@media (max-width: 440px) {
+  .cabecalho__atalho {
+    padding: 0 8px;
+    line-height: 1.05;
+    text-align: left;
+  }
+  .cabecalho__quebra {
+    display: block;
+  }
+}
+/* movimento reduzido (classe html.reduzido, ver lib/utilidades.ts) */
+html.reduzido .menu-celular__lista li {
+  animation: none;
+}
+

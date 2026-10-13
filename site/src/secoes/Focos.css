@@ -1,0 +1,53 @@
+.focos {
+  position: relative;
+  padding: clamp(40px, 6vw, 80px) 0;
+  overflow: hidden;
+  background: var(--volt);
+  color: var(--volt-ink);
+  transform: skewY(-2.5deg);
+  margin-block: 4vw;
+  box-shadow: 0 0 80px rgba(214, 246, 0, 0.25);
+}
+.fc-linha {
+  overflow: hidden;
+}
+.fc-linha--b {
+  margin-top: 6px;
+}
+.fc-trilha {
+  display: flex;
+  width: max-content;
+}
+.fc-bloco {
+  display: flex;
+  flex: none;
+}
+.fc-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding-right: 0.35em;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 62%;
+  text-transform: uppercase;
+  font-size: clamp(3.2rem, 9vw, 9.5rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+.fc-item--vazado {
+  color: transparent;
+  -webkit-text-stroke: 1.6px var(--volt-ink);
+}
+.fc-raio {
+  width: 0.5em;
+  height: 0.5em;
+  flex: none;
+  fill: var(--volt-ink);
+}
+.fc-item--vazado .fc-raio {
+  fill: none;
+  stroke: var(--volt-ink);
+  stroke-width: 1.4;
+}

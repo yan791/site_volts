@@ -1,0 +1,82 @@
+{
+  "salao": {
+    "w": 720,
+    "h": 1280,
+    "larguras": [
+      480,
+      720
+    ]
+  },
+  "fachada-raio": {
+    "w": 504,
+    "h": 1127,
+    "larguras": [
+      420,
+      504
+    ]
+  },
+  "fachada": {
+    "w": 720,
+    "h": 551,
+    "larguras": [
+      480,
+      720
+    ]
+  },
+  "equipamentos": {
+    "w": 720,
+    "h": 819,
+    "larguras": [
+      480,
+      720
+    ]
+  },
+  "professores": {
+    "w": 778,
+    "h": 979,
+    "larguras": [
+      480,
+      778
+    ]
+  },
+  "ativa": {
+    "w": 1187,
+    "h": 821,
+    "larguras": [
+      600,
+      1100
+    ]
+  },
+  "corrida": {
+    "w": 561,
+    "h": 1594,
+    "larguras": [
+      480,
+      561
+    ]
+  },
+  "meia-maratona": {
+    "w": 1440,
+    "h": 634,
+    "larguras": [
+      720,
+      1400
+    ]
+  },
+  "dia-do-cliente": {
+    "w": 1440,
+    "h": 480,
+    "larguras": [
+      720,
+      1400
+    ]
+  },
+  "evento": {
+    "w": 590,
+    "h": 1747,
+    "larguras": [
+      480,
+      590
+    ]
+  }
+}

@@ -1,0 +1,274 @@
+/* portal de neon (também usado na aba de compra) */
+.portal {
+  position: absolute;
+  inset: 6% 8% 12%;
+  pointer-events: none;
+}
+.portal i {
+  position: absolute;
+  border: 2px solid var(--quente);
+  box-shadow:
+    0 0 24px rgba(243, 230, 207, 0.4),
+    inset 0 0 24px rgba(243, 230, 207, 0.22);
+}
+.portal i:nth-child(1) {
+  inset: 0;
+}
+.portal i:nth-child(2) {
+  inset: 13%;
+  border-color: var(--neon);
+  box-shadow:
+    0 0 26px rgba(70, 240, 140, 0.5),
+    inset 0 0 22px rgba(70, 240, 140, 0.3);
+}
+.portal i:nth-child(3) {
+  inset: 26%;
+  opacity: 0.5;
+}
+.portal::after {
+  /* brilho no chão */
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -12%;
+  height: 22%;
+  background: radial-gradient(ellipse at center, rgba(70, 240, 140, 0.18), transparent 70%);
+}
+.camisa-scroll {
+  --p: 0;
+  position: relative;
+  background: var(--ink-1);
+}
+.cs-fixo {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 2vw;
+  padding: calc(var(--cabecalho) + 10px) var(--margem) 30px;
+  overflow: hidden;
+}
+.cs-faixa {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 56%;
+  height: 22vh;
+  background: var(--volt);
+  opacity: 0.07;
+  transform: rotate(calc(-14deg + var(--p) * 10deg));
+}
+.cs-palco {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+}
+.cs-portal {
+  inset: 10% 14% 14%;
+  transform: scale(calc(0.94 + var(--p) * 0.08)) rotate(calc(var(--p) * 4deg));
+}
+.cs-canvas,
+.cs-estatica {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.cs-estatica {
+  object-fit: contain;
+  padding: 6%;
+}
+.cs-canvas {
+  opacity: 0;
+  transition: opacity 0.8s var(--ease);
+}
+.cs-canvas--pronto {
+  opacity: 1;
+}
+.cs-volta {
+  position: absolute;
+  left: 4%;
+  bottom: 6%;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-style: italic;
+  line-height: 0.8;
+  color: var(--volt);
+}
+.cs-volta small {
+  font-size: 0.35em;
+  color: var(--fg-3);
+}
+.cs-texto {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 18px;
+  max-width: 500px;
+}
+.cs-titulo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.cs-titulo .display {
+  font-size: clamp(2.8rem, 5.6vw, 5.8rem);
+  font-weight: 900;
+  font-stretch: 125%;
+  line-height: 0.88;
+}
+.cs-titulo .condensada {
+  font-size: clamp(3.2rem, 6.6vw, 6.8rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.92;
+}
+.cs-slogan {
+  font-family: var(--f-display);
+  font-weight: 760;
+  font-stretch: 108%;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.95rem;
+}
+.cs-opcoes {
+  display: grid;
+  gap: 8px;
+  margin-top: 6px;
+}
+.cs-opcao {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px 10px 10px;
+  text-align: left;
+  box-shadow: inset 0 0 0 1px var(--linha);
+  transition:
+    box-shadow 0.4s var(--ease),
+    background-color 0.4s var(--ease),
+    transform 0.4s var(--ease);
+}
+.cs-opcao:hover {
+  box-shadow: inset 0 0 0 1px var(--fg-3);
+}
+.cs-opcao--ativa {
+  background: rgba(214, 246, 0, 0.07);
+  box-shadow: inset 0 0 0 2px var(--volt);
+  transform: translateX(8px);
+}
+.cs-amostra {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--a) 0 60%, var(--d) 60% 68%, var(--a) 68% 76%, var(--d) 76% 84%, var(--a) 84%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+.cs-opcao-texto {
+  display: grid;
+  gap: 2px;
+}
+.cs-opcao-texto strong {
+  font-family: var(--f-display);
+  font-weight: 820;
+  font-stretch: 110%;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+.cs-opcao-texto span {
+  font-size: 0.8125rem;
+  color: var(--fg-2);
+}
+.cs-compra {
+  display: grid;
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid var(--linha);
+}
+.cs-preco {
+  display: grid;
+  gap: 4px;
+}
+.cs-preco .condensada {
+  font-size: clamp(2.6rem, 4vw, 3.6rem);
+  line-height: 0.9;
+}
+.cs-preco span:last-child {
+  font-size: 0.8125rem;
+  color: var(--fg-2);
+}
+.cs-compra .botao {
+  justify-self: start;
+}
+.cs-barra {
+  position: absolute;
+  left: var(--margem);
+  right: var(--margem);
+  bottom: 16px;
+  height: 2px;
+  background: var(--linha);
+}
+.cs-barra i {
+  display: block;
+  height: 100%;
+  background: var(--volt);
+  box-shadow: 0 0 10px var(--volt);
+  transform: scaleX(var(--p));
+  transform-origin: left;
+}
+
+@media (max-width: 899px) {
+  .cs-fixo {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 6px;
+    padding-bottom: 26px;
+  }
+  .cs-texto {
+    max-width: none;
+    gap: 10px;
+  }
+  .cs-titulo,
+  .cs-slogan,
+  .cs-texto > .rotulo {
+    display: none;
+  }
+  .cs-opcoes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .cs-opcao {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px;
+  }
+  .cs-opcao--ativa {
+    transform: none;
+  }
+  .cs-opcao-texto span {
+    display: none;
+  }
+  .cs-amostra {
+    width: 30px;
+    height: 30px;
+  }
+  .cs-compra {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding-top: 10px;
+  }
+  .cs-preco span:last-child {
+    display: none;
+  }
+  .cs-volta {
+    font-size: 2.6rem;
+  }
+}
+@media (max-width: 899px) and (max-height: 700px) {
+  .cs-opcoes {
+    display: none;
+  }
+}

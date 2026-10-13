@@ -1,0 +1,120 @@
+.seletores {
+  display: grid;
+  gap: 22px;
+}
+.seletores__grupo {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.seletores__titulo {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 0;
+  margin-bottom: 12px;
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+.seletores__titulo span {
+  font-family: var(--f-texto);
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--fg);
+  font-weight: 600;
+}
+.seletores input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.seletores__cores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.amostra {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 6px 16px 6px 6px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--linha-2);
+  transition: box-shadow 0.3s var(--ease);
+}
+.amostra:hover {
+  box-shadow: inset 0 0 0 1px var(--fg-3);
+}
+.amostra:has(input:checked) {
+  box-shadow: inset 0 0 0 2px var(--volt);
+}
+.amostra:has(input:focus-visible) {
+  outline: 2px solid var(--volt);
+  outline-offset: 3px;
+}
+.amostra__bola {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--a) 0 62%, var(--d) 62% 70%, var(--a) 70% 78%, var(--d) 78% 86%, var(--a) 86%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+.amostra__nome {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.amostra--indisponivel {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+.amostra--indisponivel .amostra__bola {
+  filter: grayscale(0.6);
+}
+.seletores__nota {
+  margin-top: 10px;
+  font-size: 0.8125rem;
+  color: var(--fg-3);
+}
+.seletores__modelos {
+  display: inline-flex;
+  box-shadow: inset 0 0 0 1px var(--linha-2);
+}
+.modelo-opcao {
+  position: relative;
+  cursor: pointer;
+}
+.modelo-opcao span {
+  display: grid;
+  place-items: center;
+  min-height: 46px;
+  padding: 0 22px;
+  font-family: var(--f-display);
+  font-weight: 760;
+  font-stretch: 108%;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  transition:
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease);
+}
+.modelo-opcao:hover span {
+  color: var(--fg);
+}
+.modelo-opcao input:checked + span {
+  background: var(--fg);
+  color: var(--ink-0);
+}
+.modelo-opcao input:focus-visible + span {
+  outline: 2px solid var(--volt);
+  outline-offset: 2px;
+}

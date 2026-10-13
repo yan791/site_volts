@@ -1,0 +1,37 @@
+.logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.18em;
+  color: var(--fg);
+  line-height: 1;
+  font-size: 26px;
+}
+.logo__linha {
+  display: inline-flex;
+  align-items: flex-end;
+}
+.logo__marca {
+  height: 0.74em;
+  width: auto;
+  margin-right: -0.05em;
+  margin-bottom: 0.005em;
+}
+.logo__palavra {
+  font-family: var(--f-display);
+  font-weight: 860;
+  font-stretch: 122%;
+  font-size: 1em;
+  letter-spacing: -0.01em;
+  line-height: 0.74;
+}
+.logo__sub {
+  font-family: var(--f-display);
+  font-weight: 620;
+  font-stretch: 112%;
+  font-size: 0.235em;
+  letter-spacing: 0.42em;
+  margin-right: -0.42em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}

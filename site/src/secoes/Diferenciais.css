@@ -1,0 +1,222 @@
+.diferenciais {
+  position: relative;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 62%, rgba(70, 240, 140, 0.07), transparent 70%),
+    var(--ink-0);
+}
+.df-fixo {
+  position: relative;
+  display: grid;
+  padding: clamp(90px, 10vw, 150px) 0 clamp(70px, 8vw, 120px);
+  overflow: hidden;
+  isolation: isolate;
+}
+.df-fundo {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  z-index: -1;
+  translate: -50% -50%;
+  white-space: nowrap;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 62%;
+  text-transform: uppercase;
+  font-size: clamp(7rem, 24vw, 26rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(214, 246, 0, 0.1);
+  pointer-events: none;
+}
+.df-topo {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+.df-titulo {
+  margin-top: 14px;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-stretch: 125%;
+  text-transform: uppercase;
+  font-size: clamp(2.1rem, 4.6vw, 4.6rem);
+  line-height: 0.9;
+}
+.df-palco {
+  position: relative;
+  height: clamp(460px, 64vh, 620px);
+  margin: 12px 0 24px;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.df-palco--arrastando {
+  cursor: grabbing;
+  user-select: none;
+}
+.df-chao {
+  position: absolute;
+  left: 50%;
+  bottom: 1%;
+  width: min(900px, 86vw);
+  height: 120px;
+  translate: -50% 0;
+  background: radial-gradient(ellipse at center, rgba(70, 240, 140, 0.2), rgba(70, 240, 140, 0.05) 45%, transparent 70%);
+  pointer-events: none;
+}
+.df-chao::after {
+  /* linha de luz no chão, como a faixa de neon do salão */
+  content: '';
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(214, 246, 0, 0.6), transparent);
+}
+
+.df-rodape {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 24px;
+}
+.df-detalhe {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 28px);
+  max-width: 660px;
+}
+.df-contador {
+  display: flex;
+  align-items: baseline;
+  flex: none;
+  font-style: italic;
+  line-height: 0.8;
+}
+.df-contador b {
+  font-size: clamp(3.2rem, 5vw, 4.8rem);
+  color: var(--volt);
+}
+.df-contador span {
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  color: var(--fg-3);
+}
+.df-desc {
+  max-width: 46ch;
+  padding-left: clamp(16px, 2vw, 28px);
+  border-left: 1px solid var(--linha-2);
+  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  color: var(--fg-2);
+  animation: df-entra 0.6s var(--ease) both;
+}
+@keyframes df-entra {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+}
+.df-controles {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: none;
+}
+.df-seta {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--linha-2);
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  transition:
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease),
+    opacity 0.3s var(--ease);
+}
+.df-seta:hover:not(:disabled) {
+  background: var(--volt);
+  color: var(--volt-ink);
+}
+.df-seta:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.df-seta--volta svg {
+  transform: rotate(180deg);
+}
+.df-pontos {
+  display: flex;
+  gap: 6px;
+}
+.df-pontos button {
+  display: grid;
+  place-items: center;
+  height: 28px;
+  padding: 0 2px;
+}
+.df-pontos i {
+  display: block;
+  width: 18px;
+  height: 3px;
+  background: var(--linha-2);
+  transition:
+    width 0.4s var(--ease),
+    background-color 0.4s var(--ease);
+}
+.df-pontos button:hover i {
+  background: var(--fg-3);
+}
+.df-pontos button[aria-current='true'] i {
+  width: 34px;
+  background: var(--volt);
+  box-shadow: 0 0 10px rgba(214, 246, 0, 0.6);
+}
+
+@media (max-width: 767px) {
+  .df-palco {
+    height: 420px;
+    margin: 4px 0 14px;
+  }
+  .df-rodape {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .df-detalhe,
+  .df-controles {
+    grid-column: 1;
+  }
+  .df-detalhe {
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .df-contador b {
+    font-size: 2.6rem;
+  }
+  .df-desc {
+    padding-left: 14px;
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+  .df-controles {
+    justify-self: stretch;
+    justify-content: space-between;
+  }
+  .df-seta {
+    width: 44px;
+    height: 44px;
+  }
+  .df-pontos i {
+    width: 14px;
+  }
+  .df-pontos button[aria-current='true'] i {
+    width: 26px;
+  }
+}

@@ -1,0 +1,16 @@
+# dependências e builds
+node_modules/
+site/dist/
+
+# material bruto do Instagram e saídas das ferramentas (ficam só no computador)
+material-instagram/
+ferramentas/shots/
+ferramentas/render/
+ferramentas/preview/
+
+# anotações internas do projeto (o repositório é público)
+PENDENCIAS.md
+pacote-de-design.md
+
+*.log
+.DS_Store

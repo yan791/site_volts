@@ -1,0 +1,551 @@
+.historia {
+  position: relative;
+  height: 640vh;
+  background: var(--ink-0);
+}
+.hs-palco {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  --sombra: 0 1px 2px rgba(5, 7, 5, 0.95), 0 4px 18px rgba(5, 7, 5, 0.8), 0 12px 50px rgba(5, 7, 5, 0.75);
+}
+.hs-poster,
+.hs-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hs-poster {
+  object-fit: cover;
+  z-index: 0;
+  transition: opacity 1.2s var(--ease);
+}
+.hs-canvas {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease);
+}
+.hs--3d .hs-canvas {
+  opacity: 1;
+}
+.hs-vinheta {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 75% at 50% 45%, rgba(6, 9, 7, 0) 40%, rgba(6, 9, 7, 0.7) 100%),
+    linear-gradient(0deg, rgba(6, 9, 7, 0.85) 0%, rgba(6, 9, 7, 0) 38%);
+}
+
+/* ---------- faixas ---------- */
+.hs-faixa {
+  position: absolute;
+  z-index: 5;
+  text-shadow: var(--sombra);
+  visibility: hidden;
+  /* camada própria: a opacidade muda a cada quadro sem redesenhar o texto (e a sombra borrada) */
+  will-change: opacity;
+}
+.hs-faixa .botao {
+  text-shadow: none;
+}
+.hs-w {
+  display: inline-block;
+}
+
+/* faixa 1: soco de palavra com sobra, comandado pela rampa de carregamento */
+.hs-f1 {
+  left: var(--margem);
+  bottom: clamp(56px, 11vh, 120px);
+  width: min(62vw, 980px);
+}
+.hs-f1::before {
+  content: '';
+  position: absolute;
+  inset: -18% -30% -20% -14%;
+  z-index: -1;
+  background: radial-gradient(ellipse 60% 62% at 40% 55%, rgba(5, 7, 5, 0.62) 0%, rgba(5, 7, 5, 0.35) 50%, rgba(5, 7, 5, 0) 78%);
+  pointer-events: none;
+}
+.hs-titulo {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 24px;
+}
+.hs-l1 {
+  font-size: clamp(3.4rem, 10.4vw, 11.5rem);
+  font-weight: 900;
+  font-stretch: 125%;
+  line-height: 0.84;
+}
+.hs-l2 {
+  font-size: clamp(2.8rem, 7.8vw, 8.6rem);
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 62%;
+  line-height: 0.9;
+}
+.hs-em {
+  color: var(--volt);
+}
+.hs-f1 .hs-w {
+  --kc: clamp(0, (var(--k, 0) - var(--th, 0)) * 3, 1);
+  --ks: clamp(0, (var(--k, 0) - var(--th, 0) - 0.12) * 3, 1);
+  opacity: var(--kc);
+  transform: scale(calc(0.8 + 0.3 * var(--kc) - 0.1 * var(--ks)));
+  transform-origin: 30% 85%;
+}
+.hs-sub,
+.hs-acoes,
+.hs-f1 .hs-rot {
+  --kb: clamp(0, (var(--k, 0) - 0.5) * 3.2, 1);
+  opacity: var(--kb);
+  transform: translate3d(0, calc((1 - var(--kb)) * 18px), 0);
+}
+.hs-f1 .hs-rot {
+  --kb: clamp(0, (var(--k, 0) - 0.05) * 4, 1);
+}
+.hs-acoes {
+  --kb: clamp(0, (var(--k, 0) - 0.66) * 3.4, 1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+.hs-sub {
+  max-width: 50ch;
+  font-size: clamp(1.02rem, 1.25vw, 1.22rem);
+  line-height: 1.6;
+  color: var(--fg);
+  opacity: calc(var(--kb) * 0.86);
+}
+
+/* faixa 2: cada palavra entra com um choque (placa amarela que varre e vira sublinhado) */
+.hs-choque {
+  left: 50%;
+  top: 50%;
+  width: 92vw;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 62%;
+  text-transform: uppercase;
+  font-size: clamp(3.4rem, 10.5vw, 12rem);
+  line-height: 0.88;
+  text-wrap: balance;
+}
+.hs-choque span {
+  --kc: clamp(0, var(--k, 0) * 2.2, 1);
+  position: relative;
+  display: inline-block;
+  padding: 0 0.12em;
+  transform: scale(calc(1.18 - 0.18 * var(--kc))) skewX(calc((1 - var(--kc)) * -7deg));
+  will-change: transform;
+}
+.hs-choque span::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: -0.1em;
+  right: -0.1em;
+  bottom: 0.04em;
+  /* a placa encolhe até virar sublinhado: só transform, sem mexer no layout a cada quadro */
+  height: 0.88em;
+  background: var(--volt);
+  transform: skewX(-14deg) scaleX(clamp(0, var(--k, 0) * 4, 1)) scaleY(calc((0.08 + (1 - clamp(0, (var(--k, 0) - 0.18) * 3.4, 1)) * 0.8) / 0.88));
+  transform-origin: left bottom;
+  opacity: 0.95;
+}
+.hs-choque--2 {
+  top: 46%;
+}
+.hs-choque--3 {
+  top: 52%;
+}
+
+/* faixa 3: título no alto, nomes dentro dos quadros */
+.hs-f3 {
+  left: var(--margem);
+  top: calc(var(--cabecalho) + 4vh);
+}
+.hs-t3 {
+  margin-top: 16px;
+  font-size: clamp(1.9rem, 3.8vw, 3.8rem);
+  line-height: 0.96;
+}
+.hs-f3 .hs-w {
+  --kc: clamp(0, (var(--k, 0) - var(--th, 0)) * 2.6, 1);
+  will-change: transform, opacity;
+  opacity: var(--kc);
+  transform: translate3d(0, calc((1 - var(--kc)) * 0.6em), 0);
+}
+.hs-rotulo {
+  position: absolute;
+  z-index: 4;
+  will-change: transform, opacity;
+  left: 0;
+  top: 0;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+  pointer-events: none;
+  visibility: hidden;
+  text-shadow: var(--sombra);
+}
+.hs-rotulo > * {
+  --kc: var(--k, 0);
+  opacity: var(--kc);
+}
+.hs-rotulo-num {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  color: var(--volt);
+}
+.hs-rotulo-nome {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-stretch: 120%;
+  text-transform: uppercase;
+  font-size: clamp(1.15rem, 2.3vw, 2.3rem);
+  line-height: 0.9;
+  white-space: nowrap;
+  transform: scaleX(calc(1 + (1 - var(--kc)) * 0.25));
+}
+.hs-rotulo-nome em {
+  font-style: normal;
+  color: var(--volt);
+}
+.hs-rotulo-tipo {
+  padding: 3px 7px;
+  background: rgba(6, 9, 7, 0.72);
+  text-shadow: none;
+  max-width: 24ch;
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* faixa 4: as letras se juntam como as partículas que montam o V */
+.hs-f4 {
+  left: 50%;
+  top: calc(var(--cabecalho) + 3vh);
+  width: 94vw;
+  margin: 0;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: clamp(2.2rem, 5.6vw, 6rem);
+  line-height: 0.95;
+}
+.hs-palavra {
+  display: inline-block;
+  white-space: nowrap;
+}
+.hs-c {
+  --kc: clamp(0, (var(--k, 0) - var(--th, 0)) * 2.6, 1);
+  display: inline-block;
+  opacity: var(--kc);
+  transform: translate(calc((1 - var(--kc)) * var(--jx, 0px)), calc((1 - var(--kc)) * var(--jy, 0px))) rotate(calc((1 - var(--kc)) * var(--jr, 0deg)));
+  will-change: transform, opacity;
+}
+
+/* ato 5: a foto real entra pelo corte do raio */
+.hs-foto {
+  --inclina: 24%;
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 46%;
+  overflow: hidden;
+  visibility: hidden;
+  clip-path: polygon(calc(var(--inclina) + var(--corte, 110) * 1%) 0, 100% 0, 100% 100%, calc(var(--corte, 110) * 1%) 100%);
+}
+.hs-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+.hs-foto::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(6, 9, 7, 0.5) 0%, rgba(6, 9, 7, 0) 40%),
+    linear-gradient(0deg, rgba(6, 9, 7, 0.75) 0%, rgba(6, 9, 7, 0) 30%);
+}
+.hs-foto-corte {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: linear-gradient(to bottom right, transparent calc(50% - 1px), var(--volt) calc(50% - 1px), var(--volt) calc(50% + 1px), transparent calc(50% + 1px)) left / var(--inclina) 100% no-repeat;
+  transform: translateX(calc(var(--corte, 110) * 1%));
+  opacity: var(--fk, 0);
+}
+.hs-foto-selo {
+  position: absolute;
+  z-index: 3;
+  right: 22px;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(6, 9, 7, 0.75);
+  box-shadow: inset 0 0 0 1px var(--linha-2);
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.hs-foto-selo svg {
+  color: var(--volt);
+}
+
+/* faixa 5: metades que se abrem */
+.hs-f5 {
+  left: var(--margem);
+  bottom: clamp(56px, 11vh, 120px);
+  width: min(52vw, 820px);
+  display: grid;
+  justify-items: start;
+  gap: 26px;
+}
+.hs-f5::before {
+  content: '';
+  position: absolute;
+  inset: -20% -20% -20% -12%;
+  z-index: -1;
+  background: radial-gradient(ellipse 62% 60% at 40% 55%, rgba(5, 7, 5, 0.6) 0%, rgba(5, 7, 5, 0) 76%);
+}
+.hs-t5 {
+  display: flex;
+  flex-direction: column;
+}
+.hs-metade--a {
+  font-size: clamp(3rem, 8.6vw, 9.4rem);
+  font-weight: 900;
+  font-stretch: 125%;
+  line-height: 0.86;
+  transform: translate3d(calc((1 - var(--k, 0)) * -18vw), 0, 0);
+}
+.hs-metade--b {
+  font-size: clamp(3rem, 8.4vw, 9.2rem);
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 62%;
+  line-height: 0.9;
+  transform: translate3d(calc((1 - var(--k, 0)) * 18vw), 0, 0);
+}
+.hs-fatos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  border-top: 1px solid var(--linha-2);
+  opacity: clamp(0, (var(--k, 0) - 0.4) * 3, 1);
+}
+.hs-fatos li {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--fg-2);
+}
+.hs-fatos li + li {
+  padding-left: 16px;
+  border-left: 1px solid var(--linha);
+}
+.hs-fatos b {
+  font-size: clamp(1.8rem, 2.6vw, 2.6rem);
+  line-height: 1;
+  color: var(--fg);
+}
+.hs-fatos li:first-child b {
+  color: var(--volt);
+}
+.hs-f5 .botao {
+  opacity: clamp(0, (var(--k, 0) - 0.55) * 3, 1);
+}
+
+/* ---------- capítulos e dica ---------- */
+.hs-cap {
+  position: absolute;
+  z-index: 6;
+  right: var(--margem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 14px;
+  pointer-events: none;
+}
+.hs-cap .barra {
+  width: 1px;
+  background: var(--linha-2);
+  position: relative;
+}
+.hs-cap .barra i {
+  position: absolute;
+  inset: 0;
+  background: var(--volt);
+  transform-origin: top;
+  box-shadow: 0 0 10px var(--volt);
+}
+.hs-cap ol {
+  display: grid;
+  gap: 14px;
+}
+.hs-cap li {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: calc(0.35 + var(--on, 0) * 0.65);
+  transition: opacity 0.4s var(--ease);
+}
+.hs-cap li .n {
+  color: var(--volt);
+}
+.hs-cap li .t {
+  opacity: var(--on, 0);
+  transform: translateX(calc((1 - var(--on, 0)) * -6px));
+  transition:
+    opacity 0.4s var(--ease),
+    transform 0.4s var(--ease);
+}
+.hs-dica {
+  position: absolute;
+  z-index: 6;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  pointer-events: none;
+}
+.hs-dica i {
+  width: 1px;
+  height: 38px;
+  background: linear-gradient(var(--volt), transparent);
+  animation: hs-dica 1.8s var(--ease-io) infinite;
+  transform-origin: top;
+}
+@keyframes hs-dica {
+  0% {
+    transform: scaleY(0);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+/* ---------- celular ---------- */
+@media (max-width: 767px) {
+  .historia {
+    height: 560vh;
+  }
+  .hs-f1 {
+    width: auto;
+    right: var(--margem);
+    bottom: 32px;
+  }
+  .hs-l1 {
+    font-size: clamp(3rem, 15vw, 6rem);
+    font-stretch: 114%;
+  }
+  .hs-l2 {
+    font-size: clamp(2.5rem, 12.6vw, 5rem);
+  }
+  .hs-acoes .botao {
+    width: 100%;
+  }
+  .hs-choque {
+    font-size: clamp(3rem, 16vw, 6rem);
+  }
+  .hs-rotulo-nome {
+    font-size: clamp(0.95rem, 4.6vw, 1.4rem);
+  }
+  .hs-rotulo-tipo {
+    display: none;
+  }
+  .hs-f3 {
+    right: var(--margem);
+  }
+  .hs-f4 {
+    font-size: clamp(1.9rem, 9vw, 3.4rem);
+  }
+  .hs-foto {
+    --inclina: 0%;
+    width: 100%;
+  }
+  .hs-foto::after {
+    background: linear-gradient(180deg, rgba(6, 9, 7, 0.5) 0%, rgba(6, 9, 7, 0) 22%, rgba(6, 9, 7, 0.2) 40%, rgba(6, 9, 7, 0.9) 66%, var(--ink-0) 92%);
+  }
+  .hs-foto-selo {
+    top: calc(var(--cabecalho) + 12px);
+    bottom: auto;
+  }
+  .hs-f5 {
+    width: auto;
+    right: var(--margem);
+    bottom: 28px;
+    gap: 18px;
+  }
+  .hs-metade--a {
+    font-size: clamp(2.8rem, 15vw, 5.6rem);
+    font-stretch: 114%;
+  }
+  .hs-metade--b {
+    font-size: clamp(2.8rem, 14vw, 5.4rem);
+  }
+  .hs-fatos li {
+    padding-right: 10px;
+    font-size: 0.72rem;
+  }
+  .hs-fatos li + li {
+    padding-left: 10px;
+  }
+  .hs-fatos b {
+    font-size: 1.6rem;
+  }
+  .hs-f5 .botao {
+    width: 100%;
+  }
+  .hs-cap {
+    display: none;
+  }
+}
+
+/* no celular os botões da primeira dobra ocupam o rodapé: a dica de rolagem sai */
+@media (max-width: 767px) {
+  .hs-dica {
+    display: none;
+  }
+}

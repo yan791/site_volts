@@ -1,0 +1,55 @@
+.v3d {
+  position: absolute;
+  inset: 0;
+}
+.v3d__canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 0.8s var(--ease);
+}
+.v3d--pronto .v3d__canvas {
+  opacity: 1;
+}
+.v3d__canvas.arrastando {
+  cursor: grabbing;
+}
+.v3d__canvas:focus-visible {
+  outline: 2px solid var(--volt);
+  outline-offset: -6px;
+}
+.v3d__carregando {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  pointer-events: none;
+}
+.v3d__volts {
+  font-size: clamp(3.4rem, 8vw, 6rem);
+  line-height: 0.85;
+  color: var(--volt);
+  font-variant-numeric: tabular-nums;
+}
+.v3d__volts small {
+  font-size: 0.45em;
+  margin-left: 4px;
+  color: var(--fg-2);
+}
+.v3d__barra {
+  width: 180px;
+  height: 2px;
+  background: var(--linha-2);
+  overflow: hidden;
+}
+.v3d__barra i {
+  display: block;
+  height: 100%;
+  background: var(--volt);
+  transform-origin: left;
+  transition: transform 0.3s linear;
+}
